@@ -242,6 +242,15 @@ def main():
 
     foodList = []
     foods = pg.sprite.Group()
+    foodBits = 200
+    fRadius = 50
+    for i in range(0, foodBits):  # spawn food bits evenly within a circle
+        dist = pow(i / (foodBits - 1.0), 0.5) * fRadius
+        angle = 2 * pi * 0.618033 * i
+        fx = 200 + dist * cos(angle)
+        fy = 200 + dist * sin(angle)
+        foods.add(Food((fx, fy)))
+    foodList.extend(foods.sprites())
     font = pg.font.Font(None, 30)
     clock = pg.time.Clock()
     fpsChecker = 0
@@ -287,7 +296,7 @@ def main():
         pg.draw.circle(screen, [60,30,30], (nest[0],nest[1]+2), 12, 4)
         pg.draw.circle(screen, [70,40,40], nest, 16, 5)
 
-        pg.draw.rect(screen, (50,50,50), [900, 0, 50, 500]) # test wall
+
 
         workers.draw(screen)
 
